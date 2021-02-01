@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Auth</title>
+</head>
+
+<body>
+    <h1>Welcome to the Movie Database</h1>
+    <h3 id="logged-in-message"></h3>
+    <form action="" id="login-form">
+        <!-- prefill the form for quick logins -->
+        <input type="email" name="username" id="username" placeholder="Username" value="test1@test.com">
+        <input type="password" name="password" id="password" placeholder="Password" value="secret">
+        <button type="button" onclick="getToken()">Login</button>
+    </form>
+    <div>
+        <p>Data from public endpoint</p>
+        <button onclick="getPublicData()">Get public data</button>
+        <p id="public-data"></p> 
+    </div>
+    <div>
+        <p>Data from private endpoint</p>
+        <button onclick="getMovies()">Get private data</button>
+        <ul id="movie-list"></ul>
+        <p id="private-data"></p>
+    </div>
+    <div>
+        <form action="" id="movieform">
+            <input type="text" name="movie-title" id="movie-title" placeholder="Enter a movie title" oninput="activateSubmit()">
+            Select Rating
+            <select name="movie-rating" id="movie-rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button type="button" onclick="addMovie()" id="submit-movie" disabled>Submit</button>
+
+        </form>
+    </div>
+    <script src="./main.js"></script>
+</body>
+
+</html>
