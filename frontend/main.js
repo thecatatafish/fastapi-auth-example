@@ -1,8 +1,11 @@
 const BASE_URL = "http://0.0.0.0:8000";
 
-function checkIfLoggendIn(token) {
+function getCookieValue (name) {
+  return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+}
+
+function checkIfLoggedIn(token) {
   msg = document.getElementById("logged-in-message");
-  // token = localStorage.getItem("token");
   baseMessage = "Logged in as: ";
   fetch(`${BASE_URL}/users/me`, {
     method: "GET",
@@ -26,7 +29,7 @@ function checkIfLoggendIn(token) {
 }
 
 function getToken() {
-  localStorage.removeItem("token");
+  document.cookie = "token=;"
   const loginData = document.getElementById("login-form");
   const data = fetch(`${BASE_URL}/token`, {
     method: "POST",
@@ -36,8 +39,8 @@ function getToken() {
       return response.json();
     })
     .then(function (data) {
-      localStorage.setItem("token", data.access_token);
-      checkIfLoggendIn(data.access_token)
+      document.cookie = "token=" + data.access_token + ";samesite=strict";
+      checkIfLoggedIn(data.access_token)
     })
     .catch(function (error) {
       console.log(error);
@@ -47,7 +50,7 @@ function getToken() {
 }
 
 function getMovies() {
-  token = localStorage.getItem("token");
+  token = getCookieValue("token");
   fetch(`${BASE_URL}/users/movie`, {
     method: "GET",
     headers: new Headers({
@@ -91,7 +94,7 @@ function activateSubmit() {
   }
 }
 function addMovie() {
-  token = localStorage.getItem("token");
+  token = getCookieValue("token");
   title = document.getElementById("movie-title");
   rating = document.getElementById("movie-rating");
   fetch(`${BASE_URL}/users/movie`, {
