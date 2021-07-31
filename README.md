@@ -19,3 +19,5 @@ In the root folder of this project install dependencies
 
 Start the backend and serve the frontend by executing
 `./start_app.sh`
+
+Go to `http://localhost:8080` to load the UI
