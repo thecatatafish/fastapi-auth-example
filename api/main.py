@@ -4,13 +4,13 @@ from starlette.middleware.cors import CORSMiddleware
 from . import models
 from .database import engine
 from .populate_database import populate_database
-from .routers import users, auth, movies, public
+from .routers import auth, movies, public, users
 
 models.Base.metadata.create_all(bind=engine)
 populate_database()
 
 app = FastAPI()
-origins = ["http://0.0.0.0:8080"]
+origins = ["http://0.0.0.0:8080", "http://localhost:8080"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

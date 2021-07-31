@@ -7,6 +7,7 @@ from passlib.context import CryptContext
 
 load_dotenv()
 
+
 @dataclass
 class Settings:
     SECRET_KEY = os.getenv("SECRET_KEY", "mysecret")

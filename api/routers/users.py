@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from ..schemas import UserBase, User
+from ..schemas import User, UserBase
 from ..utilities import get_current_active_user
 
 router = APIRouter()
